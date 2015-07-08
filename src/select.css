@@ -1,0 +1,83 @@
+.cp-select-outer {
+	position: relative;
+	height: 32px;
+	font-size: 12px;
+}
+
+.cp-select {
+	border-radius: 2px;
+	box-shadow: 0 1px 4px 0 rgba(0,0,0,.26);
+	display: inline-block;
+	padding: 8px 14px;
+	min-width: 140px;
+	color: #AFAFAF;
+	background-color: #fff;
+	cursor: pointer;
+	width: 100%;
+	height: 32px;
+}
+
+.cps-has-error .cp-select {
+	box-shadow: 0 1px 4px 0 #FE996C;
+}
+
+.cp-select.\+disabled {
+	cursor: not-allowed;
+	background-color: #F9F9F9;
+	opacity: 1;
+	border: 1px dashed #CFCFCF;
+}
+
+.cp-select.\+focus {
+	box-shadow: 0 0 0 2px rgba(76,175,80,.3); /* emulate the border */
+}
+
+.cp-select__selected {
+	width: calc(100% - 15px);
+	vertical-align: middle;
+	display: inline-block;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.cp-select__icon {
+	display: inline-block;
+	border-color: #AFAFAF transparent;
+	border-style: solid;
+	border-width: 6px 6px 0px 6px;
+	height: 0px;
+	width: 0px;
+	float:right;
+	position: relative;
+	top: 6px;
+}
+
+.cp-select-outer .cp-select__menu {
+	display: block;
+	max-height: 400px;
+	overflow: auto;
+	width: 100%;
+	position: absolute;
+	font-size: 12px;
+}
+
+.cp-select-outer .cp-select__menu li {
+	height: 36px!important;
+}
+
+.cp-select-outer .cp-select__menu li.\+selected > a {
+	color: #333333;
+	text-decoration: none;
+	background-color: #f7f7f7;
+}
+
+.cp-select__hidden-input {
+	opacity: 0;
+	position: absolute;
+	left: 0;
+	top:0;
+	width: 0;
+	height: 0;
+}
+

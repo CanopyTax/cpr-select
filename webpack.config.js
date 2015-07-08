@@ -6,7 +6,7 @@ var version = require('./package.json').version;
 var name = require('./package.json').name;
 
 module.exports = {
-	entry: "./src/multi-selector.js",
+	entry: "./src/select.js",
 	output: {
 		path: './build',
 		filename: name + '.js'
