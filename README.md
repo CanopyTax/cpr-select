@@ -15,7 +15,7 @@ Canopy React Select
 
 ### Basic
 ```jsx
-import MultiSelect from 'cpr-multiselect';
+import CanopySelect from 'cpr-select';
 
 let items = [
 	{
@@ -34,7 +34,7 @@ function itemsChanged(key, item, index) {
 	console.log(key);
 }
 
-<MultiSelect items={items} onChange={itemsChanged} placeholder="Select a country" selected="AK"></MultiSelect>
+<CanopySelect items={items} onChange={itemsChanged} placeholder="Select a country" selected="AK"></CanopySelect>
 ```
 
 ## Demo

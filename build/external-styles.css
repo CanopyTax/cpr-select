@@ -1,8 +1,8 @@
-.cp-multi-selector {
+.cp-select-outer {
 	font-family: Verdana, Geneva, sans-serif;
 }
 
-.cp-multi-selector, .cp-multi-selector * {
+.cp-select-outer, .cp-select-outer * {
 	box-sizing: border-box;
 }
 
@@ -48,37 +48,36 @@
   background-color: #afafaf !important;
 }
 
-.cps-icon {
-  font-size: 20px;
-  color: #777777;
-  font-family: 'canopy-icons';
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.cps-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 8px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border-radius: 2px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.06), 0 2px 6px 0 rgba(0, 0, 0, 0.26);
 }
 
-.cps-icon-sm-close:before {
-  content: "x";
-  display: inline-block;
-  font-family: "canopy-icons";
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  line-height: 1;
-  text-decoration: inherit;
-  text-rendering: optimizeLegibility;
-  text-transform: none;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased
+.cp-select-outer .cp-select__menu li {
+  height: 36px!important;
 }
 
-.cp-multi-selector-item__icon {
-	font-size: 14px;
-	padding-top: 6px;
+.cps-dropdown-menu li > a {
+  display: block;
+  padding: 8px 16px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.42857143;
+  color: #333333;
+  white-space: nowrap;
+  text-decoration: none;
+	cursor: pointer;
 }
