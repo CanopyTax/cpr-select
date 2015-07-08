@@ -1,5 +1,5 @@
 import React from 'react';
-import {without, contains, union, isNull, findIndex} from 'lodash';
+import {findIndex} from 'lodash';
 import './select.css';
 
 let searchString;
@@ -96,6 +96,7 @@ const CanopySelect = React.createClass({
 		if (this.props.onChange) {
 			this.props.onChange.call(
 				null,
+				this.props.options[this.state.selectedIndex].key,
 				this.props.options[this.state.selectedIndex],
 				this.state.selectedIndex
 			);

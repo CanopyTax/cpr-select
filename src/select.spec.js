@@ -72,7 +72,7 @@ describe('select', function() {
 		expect(menu[0].getDOMNode().querySelectorAll('li').length).toBe(3);
 	});
 
-	it('Should select items and trigger a callback', function() {
+	it('Should select items and trigger a callback', function(run) {
 		let items = [
 			{
 				"value": "Alabama",
@@ -86,9 +86,10 @@ describe('select', function() {
 			}
 		];
 
-		function callback(item, index) {
+		function callback(key, item, index) {
+			expect(key).toBe('AS');
 			expect(item.key).toBe('AS');
-			expect(item.key).toBe(2);
+			expect(index).toBe(2);
 
 			let selection = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cp-select__selected');
 			expect(selection.getDOMNode().textContent).toEqual('American Samoa');
@@ -102,7 +103,7 @@ describe('select', function() {
 		let select = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cp-select');
 		TestUtils.Simulate.click(select);
 
-		TestUtils.Simulate.click(
+		TestUtils.Simulate.mouseDown(
 			React.findDOMNode(multiSelect.getDOMNode().querySelectorAll('li')[2])
 		);
 
