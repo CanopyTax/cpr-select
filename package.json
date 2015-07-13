@@ -1,8 +1,8 @@
 {
   "name": "cpr-select",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A consistently styled cross-browser and keyboard friendly select component",
-  "main": "build/cpr-select.js",
+  "main": "src/select.js",
   "scripts": {
     "test": "node node_modules/karma/bin/karma start",
     "build": "webpack --optimize-minimize"
