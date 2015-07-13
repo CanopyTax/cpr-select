@@ -196,7 +196,14 @@ const CanopySelect = React.createClass({
 			});
 
 			setTimeout(() => {
-				React.findDOMNode(this).querySelector('.cp-select__hidden-input').focus();
+				try {
+					React.findDOMNode(this).querySelector('.cp-select__hidden-input').focus();
+				} catch(e) {
+					// It is okay if the element does not exist anymore
+					if (e.message.indexOf('Invariant Violation') === -1) {
+						throw new Error(e.message);
+					}
+				}
 			}, 100);
 
 			return (
