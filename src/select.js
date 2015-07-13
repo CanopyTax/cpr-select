@@ -1,6 +1,5 @@
 import React from 'react';
 import {findIndex} from 'lodash';
-import './select.css';
 
 let searchString;
 let keyTimeout;
