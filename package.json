@@ -1,12 +1,12 @@
 {
   "name": "cpr-select",
-  "version": "1.0.6",
+  "version": "1.1.0",
   "description": "A consistently styled cross-browser and keyboard friendly select component",
   "main": "lib/select.js",
   "scripts": {
     "test": "node node_modules/karma/bin/karma start",
     "dist": "webpack --optimize-minimize",
-		"compile": "node node_modules/babel/bin/babel/index.js src --out-dir lib",
+		"compile": "node node_modules/babel/bin/babel.js src --out-dir lib",
 		"build": "npm run dist && npm run compile"
   },
   "repository": {

@@ -90,9 +90,6 @@ describe('select', function() {
 			expect(key).toBe('AS');
 			expect(item.key).toBe('AS');
 			expect(index).toBe(2);
-
-			let selection = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cp-select__selected');
-			expect(selection.getDOMNode().textContent).toEqual('American Samoa');
 			run();
 		}
 

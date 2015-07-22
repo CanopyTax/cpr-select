@@ -23,11 +23,10 @@ const CanopySelect = React.createClass({
 		let selectedIndex = null;
 
 		if (this.props.selected) {
-			selectedIndex = findIndex(this.props.options, {key: this.props.selected});
+			selectedIndex = this.getIndex(this.props.selected);
 		}
 
 		return {
-			selectedIndex: selectedIndex,
 			dialogDisplayed: false,
 			top: 0,
 			focused: false,
@@ -46,6 +45,10 @@ const CanopySelect = React.createClass({
 		this.setState({
 			dialogDisplayed: true
 		})
+	},
+
+	getIndex: function(key) {
+		return findIndex(this.props.options, {key: key});
 	},
 
 	onKeyDown: function(e) {
@@ -218,7 +221,9 @@ const CanopySelect = React.createClass({
 
 	render: function() {
 		let cpSelectClasses = 'cp-select';
-		let selectedItem = this.props.options[this.state.selectedIndex];
+		let selectedItem = this.props.options[
+			this.getIndex(this.props.selected)
+		];
 
 		if (this.props.disabled) cpSelectClasses += ' +disabled';
 		if (this.state.focused) cpSelectClasses += ' +focus';
@@ -236,6 +241,6 @@ const CanopySelect = React.createClass({
 	}
 });
 
-if (!window.CanopySelect) window.CanopySelect = CanopySelect;
+if (window && !window.CanopySelect) window.CanopySelect = CanopySelect;
 
 export default CanopySelect;
