@@ -62,7 +62,7 @@ const CanopySelect = React.createClass({
 
 			this.setState({
 				dialogDisplayed: true,
-				selectedIndex: !selectedIndex ? 0 : selectedIndex - 1
+				selectedIndex: selectedIndex === undefined ? 0 : selectedIndex - 1
 			});
 
 			//positionDialog(scope.collection[scope.selectedIndex]);
