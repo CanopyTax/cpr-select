@@ -6,8 +6,8 @@
   "scripts": {
     "test": "node node_modules/karma/bin/karma start",
     "dist": "webpack --optimize-minimize",
-		"compile": "node node_modules/babel/bin/babel.js src --out-dir lib",
-		"build": "npm run dist && npm run compile"
+    "compile": "node node_modules/babel/bin/babel.js src --out-dir lib",
+    "build": "npm run dist && npm run compile"
   },
   "repository": {
     "type": "git",
@@ -27,7 +27,7 @@
     "css-loader": "^0.9.1",
     "jasmine-core": "^2.1.3",
     "jsx-loader": "^0.13.2",
-    "karma": "^0.12.31",
+    "karma": "^0.13.11",
     "karma-chrome-launcher": "^0.1.7",
     "karma-jasmine": "^0.3.4",
     "karma-phantomjs-launcher": "^0.2.0",
