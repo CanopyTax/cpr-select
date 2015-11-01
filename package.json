@@ -6,8 +6,8 @@
   "scripts": {
     "test": "node node_modules/karma/bin/karma start",
     "dist": "webpack --optimize-minimize",
-		"compile": "node node_modules/babel/bin/babel.js src --out-dir lib",
-		"build": "npm run dist && npm run compile"
+    "compile": "node node_modules/babel/bin/babel.js src --out-dir lib",
+    "build": "npm run dist && npm run compile"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,7 @@
   "homepage": "https://github.com/CanopyTax/cpr-select",
   "devDependencies": {
     "autoprefixer-loader": "^1.2.0",
-    "babel": "^5.6.14",
+    "babel": "^6.0.15",
     "babel-core": "^4.7.13",
     "babel-loader": "^4.2.0",
     "css-loader": "^0.9.1",
