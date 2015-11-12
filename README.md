@@ -35,7 +35,7 @@ function itemsChanged(key, item, index) {
 	console.log(key);
 }
 
-<CanopySelect items={items} onChange={itemsChanged} placeholder="Select a country" selected="AK"></CanopySelect>
+<CanopySelect options={items} onChange={itemsChanged} placeholder="Select a country" selected="AK"></CanopySelect>
 ```
 
 ## Demo
