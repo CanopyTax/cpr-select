@@ -213,8 +213,8 @@
 						"value": "Wyoming",
 						"key": "WY"
 					}
-			], selected: 'TX', placeholder: 'Select a country', onChange: function() {
-			debugger;
+			], selected: 'TX', placeholder: 'Select a country', onChange: function(e) {
+				console.log(e);
 			}}),
 			document.getElementById('cpSelect')
 		);

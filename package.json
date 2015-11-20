@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "lodash": "^3.10.0",
-    "react": "^0.13.3"
+    "react": "^0.14.2"
   },
   "optionalDependencies": {
     "canopy-styleguide": "*"
