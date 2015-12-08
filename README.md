@@ -4,7 +4,7 @@ cpr-select [![Build Status](https://travis-ci.org/CanopyTax/cpr-select.png?branc
 Canopy React Select
 
 ## Requirements
- - React 0.13.3
+ - React ^0.14.2
  - Lodash methods findIndex
 
 ## Installation
