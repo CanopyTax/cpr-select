@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {findIndex} from 'lodash';
 
 let searchString;
@@ -141,7 +142,7 @@ const CanopySelect = React.createClass({
 
 	positionDialog: function(index) {
 		setTimeout(() => {
-			let menuDialog = React.findDOMNode(this).querySelector(".cp-select__menu");
+			let menuDialog = ReactDOM.findDOMNode(this).querySelector(".cp-select__menu");
 			if (menuDialog) {
 				menuDialog.scrollTop = (36 * index - 192);
 			}
@@ -200,7 +201,7 @@ const CanopySelect = React.createClass({
 
 			setTimeout(() => {
 				try {
-					React.findDOMNode(this).querySelector('.cp-select__hidden-input').focus();
+					ReactDOM.findDOMNode(this).querySelector('.cp-select__hidden-input').focus();
 				} catch(e) {
 					// It is okay if the element does not exist anymore
 					if (e.message.indexOf('Invariant Violation') === -1) {
