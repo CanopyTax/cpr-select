@@ -17,6 +17,7 @@ Canopy React Select
 ### Basic
 ```jsx
 import CanopySelect from 'cpr-select';
+import 'cpr-select/src/select.css';
 
 let items = [
 	{
