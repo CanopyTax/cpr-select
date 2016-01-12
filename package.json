@@ -9,9 +9,9 @@
     "compile": "babel src --out-dir lib",
     "build": "npm run dist && npm run compile"
   },
-	"sofe": {
-		"url": "http://localhost:5555/test-services/urls.js"
-	},
+  "sofe": {
+    "url": "http://localhost:5555/test-services/urls.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/CanopyTax/cpr-select.git"
@@ -43,7 +43,7 @@
     "webpack": "1.4.15"
   },
   "dependencies": {
-    "lodash": "^3.10.0",
+    "lodash": "^4.0.0",
     "react": "^0.14.2",
     "react-dom": "^0.14.2"
   },
