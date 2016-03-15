@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {findIndex} from 'lodash';
 
 let searchString;
@@ -142,7 +141,7 @@ const CanopySelect = React.createClass({
 
 	positionDialog: function(index) {
 		setTimeout(() => {
-			let menuDialog = ReactDOM.findDOMNode(this).querySelector(".cp-select__menu");
+			let menuDialog = this.el.querySelector(".cp-select__menu");
 			if (menuDialog) {
 				menuDialog.scrollTop = (36 * index - 192);
 			}
@@ -201,7 +200,7 @@ const CanopySelect = React.createClass({
 
 			setTimeout(() => {
 				try {
-					ReactDOM.findDOMNode(this).querySelector('.cp-select__hidden-input').focus();
+					this.el.querySelector('.cp-select__hidden-input').focus();
 				} catch(e) {
 					// It is okay if the element does not exist anymore
 					if (e.message.indexOf('Invariant Violation') === -1) {
@@ -225,12 +224,13 @@ const CanopySelect = React.createClass({
 		let selectedItem = this.props.options[
 			this.getIndex(this.props.selected)
 		];
+		let that = this;
 
 		if (this.props.disabled) cpSelectClasses += ' +disabled';
 		if (this.state.focused) cpSelectClasses += ' +focus';
 
 		return (
-			<div className='cp-select-outer' role='select'>
+			<div ref={function(el) { if (el) that.el = el; }} className='cp-select-outer' role='select'>
 				<input className="cp-select__hidden-input" onFocus={this.focusSelect} onBlur={this.onBlur} onKeyDown={this.onKeyDown}/>
 				<div className={cpSelectClasses} onClick={this.displayDialog}>
 					<div className="cp-select__selected">{selectedItem ? selectedItem.value : this.props.placeholder}</div>

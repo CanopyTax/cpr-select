@@ -1,5 +1,6 @@
 import CanopySelect from './select.js';
 import React from 'react';
+import ReactDOM from 'react-dom';
 import TestUtils from 'react/lib/ReactTestUtils';
 
 describe('select', function() {
@@ -21,7 +22,7 @@ describe('select', function() {
 		);
 
 		let selection = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cp-select__selected');
-		expect(selection.getDOMNode().textContent).toEqual('Kifak?');
+		expect(ReactDOM.findDOMNode(selection).textContent).toEqual('Kifak?');
 	});
 
 	it('Should render a component with a selected option', function() {
@@ -43,7 +44,7 @@ describe('select', function() {
 		);
 
 		let selection = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cp-select__selected');
-		expect(selection.getDOMNode().textContent).toEqual('Alaska');
+		expect(ReactDOM.findDOMNode(selection).textContent).toEqual('Alaska');
 	});
 
 	it('Should render a dialog when clicked', function() {
@@ -69,7 +70,7 @@ describe('select', function() {
 
 		let menu = TestUtils.scryRenderedDOMComponentsWithClass(multiSelect, 'cp-select__menu');
 		expect(menu.length).toBe(1);
-		expect(menu[0].getDOMNode().querySelectorAll('li').length).toBe(3);
+		expect(ReactDOM.findDOMNode(menu[0]).querySelectorAll('li').length).toBe(3);
 	});
 
 	it('Should select items and trigger a callback', function(run) {
@@ -101,8 +102,9 @@ describe('select', function() {
 		TestUtils.Simulate.click(select);
 
 		TestUtils.Simulate.mouseDown(
-			React.findDOMNode(multiSelect.getDOMNode().querySelectorAll('li')[2])
+			ReactDOM.findDOMNode(
+				ReactDOM.findDOMNode(multiSelect).querySelectorAll('li')[2]
+			)
 		);
-
 	});
 });
