@@ -31,11 +31,15 @@
 	<link type="text/css" href="src/select.css" rel="stylesheet">
 	<script type="text/javascript" src="node_modules/react/dist/react.min.js"></script>
 	<script type="text/javascript" src="node_modules/react-dom/dist/react-dom.min.js"></script>
-	<script type="text/javascript" src="node_modules/lodash/index.js"></script>
+	<script type="text/javascript" src="node_modules/lodash/lodash.js"></script>
 	<script type="text/javascript" src="build/cpr-select.js"></script>
 	<script>
 		ReactDOM.render(
 			React.createElement(window.CanopySelect, {options: [
+					{
+						"value": null,
+						"key": null
+					},
 					{
 						"value": "Alabama",
 						"key": "AL"
