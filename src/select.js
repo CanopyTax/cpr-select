@@ -98,7 +98,7 @@ const CanopySelect = React.createClass({
 		if (this.props.onChange) {
 			this.props.onChange.call(
 				null,
-				this.props.options[this.state.selectedIndex].key,
+				this.state.selectedIndex !== null ? this.props.options[this.state.selectedIndex].key : null,
 				this.props.options[this.state.selectedIndex],
 				this.state.selectedIndex
 			);
@@ -194,9 +194,10 @@ const CanopySelect = React.createClass({
 
 			let selectedIndex = this.state.selectedIndex;
 
-			let optionElements = options.map((option, index) => {
+			let blankOption = [<li key={"blankOption"} className={selectedIndex === null ? '+selected' : ''} onMouseDown={this.selectItem.bind(this, null)}><a style={{color: "rgba(0,0,0,0)"}}>null</a></li>]
+			let optionElements = blankOption.concat(options.map((option, index) => {
 				return <li key={option.key} className={selectedIndex === index ? '+selected' : ''} onMouseDown={this.selectItem.bind(this, index)}><a>{option.value}</a></li>
-			});
+			}));
 
 			setTimeout(() => {
 				try {
@@ -211,7 +212,7 @@ const CanopySelect = React.createClass({
 
 			return (
 				<div>
-					<ul className="cp-select__menu cps-dropdown-menu" style={{top: this.positionDialogAndGetTop(options, selectedIndex)}}>
+					<ul className="cp-select__menu cps-dropdown-menu" style={{top: this.positionDialogAndGetTop(options, selectedIndex === null ? 0 : selectedIndex + 1)}}>
 						{optionElements}
 					</ul>
 				</div>
