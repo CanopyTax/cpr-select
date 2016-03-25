@@ -181,11 +181,12 @@ const CanopySelect = React.createClass({
 	getIndexFromString: function(searchString) {
 		searchString = searchString.toLowerCase();
 		return findIndex(this.props.options, (option) => {
-			return this.getViewValue(option).toLowerCase().indexOf(searchString) === 0;
+			return this.getViewValue(option) !== null ? this.getViewValue(option).toLowerCase().indexOf(searchString) === 0 : false;
 		});
 	},
 
 	getViewValue: function(option) {
+		if (option.value === null) return null;
 		return option.value || option;
 	},
 
