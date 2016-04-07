@@ -7,7 +7,8 @@
     "test": "node node_modules/karma/bin/karma start",
     "dist": "webpack --optimize-minimize",
     "compile": "babel src --out-dir lib",
-    "build": "npm run dist && npm run compile"
+    "build": "npm run dist && npm run compile",
+		"pre-publish": "npm run build"
   },
   "sofe": {
     "url": "http://localhost:5555/test-services/urls.js"
@@ -50,5 +51,9 @@
   },
   "optionalDependencies": {
     "canopy-styleguide": "*"
-  }
+  },
+	"files": [
+    "build",
+    "lib"
+  ]
 }
