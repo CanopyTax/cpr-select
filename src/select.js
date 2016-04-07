@@ -1,7 +1,7 @@
 import React from 'react';
 import {findIndex} from 'lodash';
 
-let searchString;
+let searchString = "";
 let keyTimeout;
 
 function nearest(element, className) {
@@ -167,11 +167,10 @@ const CanopySelect = React.createClass({
 		var i = this.getIndexFromString(searchString);
 
 		if(i > -1) {
-			this.setState({
-				selectedIndex: i,
-				//			dialogDisplayed: true
-			});
+			this.selectItem(i);
 		}
+
+		clearTimeout(keyTimeout);
 
 		keyTimeout = setTimeout(function() {
 			searchString = "";
