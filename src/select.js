@@ -242,6 +242,6 @@ const CanopySelect = React.createClass({
 	}
 });
 
-if (window && !window.CanopySelect) window.CanopySelect = CanopySelect;
+if (typeof window !== "undefined" && window && !window.CanopySelect) window.CanopySelect = CanopySelect;
 
 export default CanopySelect;
