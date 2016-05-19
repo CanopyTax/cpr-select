@@ -14,6 +14,13 @@ Canopy React Select
 
 ## Usage
 
+### Props
++ `selected`: the key of the currently selected item
++ `options`: the items to select from
++ `onChange`: called when selected item changes
++ `disabled`: pass true to disable the input
++ `placeholder`: placeholder for input
+
 ### Basic
 ```jsx
 import CanopySelect from 'cpr-select';
