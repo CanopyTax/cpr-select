@@ -4,9 +4,9 @@ import {findIndex} from 'lodash';
 let searchString = "";
 let keyTimeout;
 
-function nearest(element, className) {
+function nearest(element, el) {
 	if (!element) return false;
-	return element.className.indexOf(className) > -1 || nearest(element.parentElement, className);
+	return element === el || nearest(element.parentElement, el);
 }
 
 const CanopySelect = React.createClass({
@@ -31,7 +31,7 @@ const CanopySelect = React.createClass({
 			top: 0,
 			focused: false,
 			close: (e) => {
-				if (!nearest(e.target, 'cp-select-outer')) {
+				if (!nearest(e.target, this.el)) {
 					this.setState({
 						dialogDisplayed: false,
 						focused: false
