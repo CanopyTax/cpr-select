@@ -107,4 +107,39 @@ describe('select', function() {
 			)
 		);
 	});
+
+	it('Should not allow up arrow to go out of bounds', function(run) {
+		let items = [
+			{
+				"value": "Alabama",
+				"key": "AL"
+			}, {
+				"value": "Alaska",
+				"key": "AK"
+			}, {
+				"value": "American Samoa",
+				"key": "AS"
+			}
+		];
+
+		function callback(key, item, index) {
+			expect(key).toBe('AL');
+			expect(item.key).toBe('AL');
+			expect(index).toBe(0);
+			run();
+		}
+
+		let multiSelect = TestUtils.renderIntoDocument(
+			<CanopySelect options={items} onChange={callback}></CanopySelect>
+		);
+
+		let select = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cp-select');
+		TestUtils.Simulate.click(select);
+		let input = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cp-select__hidden-input');
+		TestUtils.Simulate.keyDown(input, {which: 38});
+		TestUtils.Simulate.keyDown(input, {which: 38});
+		TestUtils.Simulate.keyDown(input, {which: 38});
+		TestUtils.Simulate.keyDown(input, {which: 38});
+		TestUtils.Simulate.keyDown(input, {which: 13});
+	});
 });

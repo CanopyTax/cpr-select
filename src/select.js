@@ -20,12 +20,6 @@ const CanopySelect = React.createClass({
 	},
 
 	getInitialState: function() {
-		let selectedIndex = null;
-
-		if (this.props.selected) {
-			selectedIndex = this.getIndex(this.props.selected);
-		}
-
 		return {
 			dialogDisplayed: false,
 			top: 0,
@@ -63,10 +57,16 @@ const CanopySelect = React.createClass({
 			this.selectItem(selectedIndex)
 		} else if(key === 38) { // up key
 
-			this.setState({
-				dialogDisplayed: true,
-				selectedIndex: selectedIndex === undefined ? 0 : selectedIndex - 1
-			});
+			if (selectedIndex <= 0) {
+				this.setState({
+					dialogDisplayed: true,
+				});
+			} else {
+				this.setState({
+					dialogDisplayed: true,
+					selectedIndex: selectedIndex === undefined ? 0 : selectedIndex - 1
+				});
+			}
 
 			//positionDialog(scope.collection[scope.selectedIndex]);
 
