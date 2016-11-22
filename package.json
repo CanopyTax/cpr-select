@@ -50,7 +50,6 @@
     "lodash": "^4.6.1"
   },
   "optionalDependencies": {
-    "canopy-styleguide": "*"
   },
   "files": [
     "build",
