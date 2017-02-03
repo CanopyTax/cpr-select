@@ -36,6 +36,8 @@ const CanopySelect = React.createClass({
 	},
 
 	displayDialog: function(e) {
+		if (this.props.disabled) return;
+
 		this.setState({
 			dialogDisplayed: true
 		})
@@ -46,6 +48,8 @@ const CanopySelect = React.createClass({
 	},
 
 	onKeyDown: function(e) {
+		if (this.props.disabled) return;
+
 		const key = e.which;
 		let selectedIndex = this.state.selectedIndex;
 
@@ -106,6 +110,8 @@ const CanopySelect = React.createClass({
 	},
 
 	selectItem: function(index, e) {
+		if (this.props.disabled) return;
+
 		setTimeout(() => {
 			this.setState({
 				selectedIndex: index,
@@ -164,7 +170,7 @@ const CanopySelect = React.createClass({
 
 	highlightByText: function(charCode) {
 		searchString += String.fromCharCode(charCode);
-		var i = this.getIndexFromString(searchString);
+		let i = this.getIndexFromString(searchString);
 
 		if(i > -1) {
 			this.selectItem(i);
@@ -227,7 +233,7 @@ const CanopySelect = React.createClass({
 		let that = this;
 
 		if (this.props.disabled) cpSelectClasses += ' +disabled';
-		if (this.state.focused) cpSelectClasses += ' +focus';
+		if (this.state.focused && !this.props.disabled) cpSelectClasses += ' +focus';
 
 		return (
 			<div ref={function(el) { if (el) that.el = el; }} className='cp-select-outer' role='select'>
