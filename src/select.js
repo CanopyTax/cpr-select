@@ -201,7 +201,11 @@ const CanopySelect = React.createClass({
 			let selectedIndex = this.state.selectedIndex;
 
 			let optionElements = options.map((option, index) => {
-				return <li key={option.key} className={selectedIndex === index ? '+selected' : ''} onMouseDown={this.selectItem.bind(this, index)}><a style={option.value !== null ? {} : {color: "rgba(0,0,0,0)"}}>{option.value !== null ? option.value : "null"}</a></li>
+				if (option.separator) {
+					return <li key={`separator${index}`} className="separator" />
+				} else {
+					return <li key={option.key} className={selectedIndex === index ? '+selected' : ''} onMouseDown={this.selectItem.bind(this, index)}><a style={option.value !== null ? {} : {color: "rgba(0,0,0,0)"}}>{option.value !== null ? option.value : "null"}</a></li>
+				}
 			});
 
 			setTimeout(() => {
