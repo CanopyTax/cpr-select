@@ -80,3 +80,8 @@
 	height: 0;
 }
 
+.cp-select-outer .cp-select__menu .separator {
+	border-bottom: 1px solid #e2e2e2;
+	height: 0px !important;
+	margin: 8px 0;
+}
