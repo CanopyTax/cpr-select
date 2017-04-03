@@ -191,7 +191,7 @@ const CanopySelect = React.createClass({
 	},
 
 	getViewValue: function(option) {
-		if (option.value === null) return null;
+		if (option.value === null || option.value === undefined) return null;
 		return option.value || option;
 	},
 
