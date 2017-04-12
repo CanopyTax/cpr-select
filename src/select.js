@@ -122,34 +122,39 @@ const CanopySelect = React.createClass({
 		});
 	},
 
-	positionDialogAndGetTop: function(options, index) {
-		let distanceFromEnd = options.length - index;
+	positionDialogAndGetTop: function(options, index, maxHeight) {
+		const distanceFromEnd = options.length - index;
+		const numVisibleOptions = Math.floor(maxHeight / 36);
+		const numSurroundingOptions = Math.floor((numVisibleOptions - 1) / 2);
+		const unusedPixels = maxHeight % 36;
 
-		if (index > 5 && distanceFromEnd < 6) {
+		if (index > numSurroundingOptions && distanceFromEnd < numSurroundingOptions + 1) {
 			// Bottom 5
-			if(options.length < 11) {
+			if (options.length < numVisibleOptions) {
 				// Dialog doesn't have a scroll
-				return ( -2 + (36 * index * -1 - 10) + "px" );
+				return -2 + (36 * index * -1 - 10) + "px";
 			} else {
 				// Dialog has a scroll
-				this.positionDialog(index);
-				return ( -215 - (5 - distanceFromEnd) * 36 + "px" );
+				this.positionDialog(index, maxHeight);
+				const start = (maxHeight / -2) - 15;
+				return start - (numSurroundingOptions - distanceFromEnd) * 36 + "px";
 			}
-		} else if (index > 5) {
+		} else if (index > numSurroundingOptions) {
 			// Middle
-			this.positionDialog(index);
-			return '-203px';
+			this.positionDialog(index, maxHeight);
+			return (maxHeight / -2) - 0.0075 * maxHeight;
 		} else {
 			// Top 5
-			return ( -1 + (36 * index * -1 - 10) + "px" );
+			return -1 + (36 * index * -1 - 10) + "px";
 		}
 	},
 
-	positionDialog: function(index) {
+	positionDialog: function(index, maxHeight) {
 		setTimeout(() => {
 			let menuDialog = this.el.querySelector(".cp-select__menu");
 			if (menuDialog) {
-				menuDialog.scrollTop = (36 * index - 192);
+				const dialogHeightImpact = maxHeight / 2 - 8;
+				menuDialog.scrollTop = (36 * index - dialogHeightImpact);
 			}
 		});
 	},
@@ -219,9 +224,10 @@ const CanopySelect = React.createClass({
 				}
 			}, 100);
 
+			const maxHeight = this.props.maxHeight || 400;
 			return (
 				<div>
-					<ul className="cp-select__menu cps-dropdown-menu" style={{top: this.positionDialogAndGetTop(options, selectedIndex)}}>
+					<ul className="cp-select__menu cps-dropdown-menu" style={{top: this.positionDialogAndGetTop(options, selectedIndex, maxHeight), maxHeight: maxHeight + 'px'}}>
 						{optionElements}
 					</ul>
 				</div>
