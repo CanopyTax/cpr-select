@@ -246,9 +246,9 @@ const CanopySelect = React.createClass({
 		if (this.state.focused && !this.props.disabled) cpSelectClasses += ' +focus';
 
 		return (
-			<div ref={function(el) { if (el) that.el = el; }} className='cp-select-outer' role='select'>
+			<div ref={function(el) { if (el) that.el = el; }} className={`cp-select-outer ${this.props.outerClass}`} role='select'>
 				<input className="cp-select__hidden-input" onFocus={this.focusSelect} onBlur={this.onBlur} onKeyDown={this.onKeyDown}/>
-				<div className={cpSelectClasses} onClick={this.displayDialog}>
+				<div className={`${cpSelectClasses} ${this.props.selectClass}`} onClick={this.displayDialog}>
 					{selectedItem
 						? <div className="cp-select__selected">{selectedItem.value}</div>
 						: <div className="cp-select__selected" style={{color:'#afafaf'}}>{this.props.placeholder}</div>
