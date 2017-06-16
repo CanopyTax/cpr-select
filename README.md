@@ -20,6 +20,8 @@ Canopy React Select
 + `onChange`: called when selected item changes
 + `disabled`: pass true to disable the input
 + `placeholder`: placeholder for input
++ `selectClass`: (optional) custom class to be added to the select element
++ `outerClass`: (optional) custom class to be added to the outer containing element
 
 ### Basic
 ```jsx
