@@ -9,45 +9,43 @@ function nearest(element, el) {
 	return element === el || nearest(element.parentElement, el);
 }
 
-const CanopySelect = React.createClass({
+export default class CanopySelect extends React.Component {
 
-	componentWillMount: function() {
-		document.body.addEventListener('click', this.state.close);
-	},
-
-	componentWillUnmount: function() {
-		document.body.removeEventListener('click', this.state.close);
-	},
-
-	getInitialState: function() {
-		return {
-			dialogDisplayed: false,
-			top: 0,
-			focused: false,
-			close: (e) => {
-				if (!nearest(e.target, this.el)) {
-					this.setState({
-						dialogDisplayed: false,
-						focused: false
-					});
-				}
+	state = {
+		dialogDisplayed: false,
+		top: 0,
+		focused: false,
+		close: (e) => {
+			if (!nearest(e.target, this.el)) {
+				this.setState({
+					dialogDisplayed: false,
+					focused: false
+				});
 			}
 		}
-	},
+	};
 
-	displayDialog: function(e) {
+	componentWillMount() {
+		document.body.addEventListener('click', this.state.close);
+	};
+
+	componentWillUnmount() {
+		document.body.removeEventListener('click', this.state.close);
+	};
+
+	displayDialog = (e) => {
 		if (this.props.disabled) return;
 
 		this.setState({
 			dialogDisplayed: true
 		})
-	},
+	};
 
-	getIndex: function(key) {
+	getIndex = (key) => {
 		return findIndex(this.props.options, {key: key});
-	},
+	};
 
-	onKeyDown: function(e) {
+	onKeyDown = (e) => {
 		if (this.props.disabled) return;
 
 		const key = e.which;
@@ -96,9 +94,9 @@ const CanopySelect = React.createClass({
 		} else {								// all other keys
 			this.highlightByText(e.which);
 		}
-	},
+	};
 
-	triggerItemChange: function() {
+	triggerItemChange = () => {
 		if (this.props.onChange) {
 			this.props.onChange.call(
 				null,
@@ -107,9 +105,9 @@ const CanopySelect = React.createClass({
 				this.state.selectedIndex
 			);
 		}
-	},
+	};
 
-	selectItem: function(index, e) {
+	selectItem = (index, e) => {
 		if (this.props.disabled) return;
 
 		setTimeout(() => {
@@ -120,9 +118,9 @@ const CanopySelect = React.createClass({
 			});
 			setTimeout(this.triggerItemChange);
 		});
-	},
+	};
 
-	positionDialogAndGetTop: function(options, index, maxHeight) {
+	positionDialogAndGetTop = (options, index, maxHeight) => {
 		const distanceFromEnd = options.length - index;
 		const numVisibleOptions = Math.floor(maxHeight / 36);
 		const numSurroundingOptions = Math.floor((numVisibleOptions - 1) / 2);
@@ -147,9 +145,9 @@ const CanopySelect = React.createClass({
 			// Top 5
 			return -1 + (36 * index * -1 - 10) + "px";
 		}
-	},
+	};
 
-	positionDialog: function(index, maxHeight) {
+	positionDialog = (index, maxHeight) => {
 		setTimeout(() => {
 			let menuDialog = this.el.querySelector(".cp-select__menu");
 			if (menuDialog) {
@@ -157,23 +155,23 @@ const CanopySelect = React.createClass({
 				menuDialog.scrollTop = (36 * index - dialogHeightImpact);
 			}
 		});
-	},
+	};
 
-	focusSelect: function() {
+	focusSelect = () => {
 		if (!this.state.focused) {
 			this.setState({
 				focused: true
 			});
 		}
-	},
+	};
 
-	onBlur: function() {
+	onBlur = () => {
 		this.setState({
 			focused: false
 		});
-	},
+	};
 
-	highlightByText: function(charCode) {
+	highlightByText = (charCode) => {
 		searchString += String.fromCharCode(charCode);
 		let i = this.getIndexFromString(searchString);
 
@@ -186,21 +184,21 @@ const CanopySelect = React.createClass({
 		keyTimeout = setTimeout(function() {
 			searchString = "";
 		}, 1000);
-	},
+	};
 
-	getIndexFromString: function(searchString) {
+	getIndexFromString = (searchString) => {
 		searchString = searchString.toLowerCase();
 		return findIndex(this.props.options, (option) => {
 			return this.getViewValue(option) !== null ? this.getViewValue(option).toLowerCase().indexOf(searchString) === 0 : false;
 		});
-	},
+	};
 
-	getViewValue: function(option) {
+	getViewValue = (option) => {
 		if (option.value === null || option.value === undefined) return null;
 		return option.value || option;
-	},
+	};
 
-	getDialog: function(dialogDisplayed, options) {
+	getDialog = (dialogDisplayed, options) => {
 		if (dialogDisplayed) {
 
 			let selectedIndex = this.state.selectedIndex;
@@ -233,9 +231,9 @@ const CanopySelect = React.createClass({
 				</div>
 			);
 		}
-	},
+	};
 
-	render: function() {
+	render = () => {
 		let cpSelectClasses = 'cp-select';
 		let selectedItem = this.props.options[
 			this.getIndex(this.props.selected)
@@ -259,8 +257,6 @@ const CanopySelect = React.createClass({
 			</div>
 		);
 	}
-});
+};
 
 if (typeof window !== "undefined" && window && !window.CanopySelect) window.CanopySelect = CanopySelect;
-
-export default CanopySelect;
