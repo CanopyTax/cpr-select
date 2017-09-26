@@ -1,6 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-var ngminPlugin = require('ngmin-webpack-plugin');
 
 var version = require('./package.json').version;
 var name = require('./package.json').name;
@@ -8,21 +7,34 @@ var name = require('./package.json').name;
 module.exports = {
 	entry: "./src/select.js",
 	output: {
-		path: './build',
+		path: path.resolve(__dirname, 'build'),
 		filename: name + '.js'
 	},
 	module: {
-		loaders: [{
-			test: /\.js$/,
-			exclude: /node_modules/,
-			loader: 'babel-loader'
-		}, {
-			test: /\.css$/,
-			loader: "style-loader!css-loader!autoprefixer"
-		}, {
-			test: /\.html$/,
-			loader: "html-loader"
-		}]
+		rules: [
+			{
+				test: /\.js$/,
+				exclude: path.resolve(__dirname, "node_modules"),
+				loader: 'babel-loader'
+			},
+			{
+				test: /\.css$/,
+				use: [
+					"style-loader",
+					{
+						loader: "css-loader",
+						options: {
+							importLoaders: 1
+						}
+					},
+					"postcss-loader"
+				]
+			},
+			{
+				test: /\.html$/,
+				loader: "html-loader"
+			}
+		],
 	},
 	externals: {
 		"react": "React",
