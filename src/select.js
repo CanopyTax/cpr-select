@@ -11,20 +11,25 @@ function nearest(element, el) {
 
 export default class CanopySelect extends React.Component {
 
-	state = {
-		dialogDisplayed: false,
-		top: 0,
-		focused: false,
-		close: (e) => {
-			if (!nearest(e.target, this.el)) {
-				this.setState({
-					dialogDisplayed: false,
-					focused: false
-				});
-			}
-		}
-	};
+	constructor(props) {
+		super(props);
 
+		this.state = {
+			dialogDisplayed: false,
+			top: 0,
+			focused: false,
+			close: e => {
+				if (!nearest(e.target, this.el)) {
+					this.setState({
+						dialogDisplayed: false,
+						focused: false,
+					});
+				}
+			},
+			selectedIndex: props.options.findIndex(el => el.key === props.selected),
+		};
+	}
+	
 	componentWillMount() {
 		document.body.addEventListener('click', this.state.close);
 	};
