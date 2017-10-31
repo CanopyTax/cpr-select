@@ -11,25 +11,20 @@ function nearest(element, el) {
 
 export default class CanopySelect extends React.Component {
 
-	constructor(props) {
-		super(props);
+	state = {
+		dialogDisplayed: false,
+		top: 0,
+		focused: false,
+		close: (e) => {
+			if (!nearest(e.target, this.el)) {
+				this.setState({
+					dialogDisplayed: false,
+					focused: false
+				});
+			}
+		}
+	};
 
-		this.state = {
-			dialogDisplayed: false,
-			top: 0,
-			focused: false,
-			close: e => {
-				if (!nearest(e.target, this.el)) {
-					this.setState({
-						dialogDisplayed: false,
-						focused: false,
-					});
-				}
-			},
-			selectedIndex: props.options.findIndex(el => el.key === props.selected),
-		};
-	}
-	
 	componentWillMount() {
 		document.body.addEventListener('click', this.state.close);
 	};
@@ -37,6 +32,13 @@ export default class CanopySelect extends React.Component {
 	componentWillUnmount() {
 		document.body.removeEventListener('click', this.state.close);
 	};
+
+	componentDidMount() { 
+		let index = this.getIndex(this.props.selected);
+		this.setState(() => ({
+			selectedIndex: index === -1 ? 0 : index,
+		}));
+	}
 
 	displayDialog = (e) => {
 		if (this.props.disabled) return;
@@ -63,7 +65,6 @@ export default class CanopySelect extends React.Component {
 		if(key === 13) {				// enter key
 			this.selectItem(selectedIndex)
 		} else if(key === 38) { // up key
-
 			if (selectedIndex <= 0) {
 				this.setState({
 					dialogDisplayed: true,
@@ -71,13 +72,11 @@ export default class CanopySelect extends React.Component {
 			} else {
 				this.setState({
 					dialogDisplayed: true,
-					selectedIndex: selectedIndex === undefined ? 0 : selectedIndex - 1
+					selectedIndex: selectedIndex - 1
 				});
 			}
 
-			//positionDialog(scope.collection[scope.selectedIndex]);
-
-		} else if(key === 40) { // down key
+		} else if (key === 40) { // down key
 
 			if (selectedIndex === this.props.options.length - 1) {
 				this.setState({
@@ -86,12 +85,9 @@ export default class CanopySelect extends React.Component {
 			} else {
 				this.setState({
 					dialogDisplayed: true,
-					selectedIndex: !selectedIndex ? 0 : selectedIndex + 1
+					selectedIndex: selectedIndex + 1
 				});
 			}
-
-			//positionDialog(scope.collection[scope.selectedIndex]);
-
 		} else if(key === 27) { // escape key
 			this.setState({
 				dialogDisplayed: false
