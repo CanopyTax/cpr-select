@@ -33,7 +33,7 @@ export default class CanopySelect extends React.Component {
 		document.body.removeEventListener('click', this.state.close);
 	};
 
-	componentDidMount() { 
+	componentDidMount() {
 		let index = this.getIndex(this.props.selected);
 		this.setState(() => ({
 			selectedIndex: index === -1 ? 0 : index,
@@ -245,7 +245,7 @@ export default class CanopySelect extends React.Component {
 		if (this.state.focused && !this.props.disabled) cpSelectClasses += ' +focus';
 
 		return (
-			<div ref={function(el) { if (el) that.el = el; }} className={`cp-select-outer ${this.props.outerClass}`} role='select'>
+			<div ref={function(el) { if (el) that.el = el; }} className={`cp-select-outer ${this.props.outerClass ? this.props.outerClass : ''}`} role='select'>
 				<input className="cp-select__hidden-input" onFocus={this.focusSelect} onBlur={this.onBlur} onKeyDown={this.onKeyDown}/>
 				<div className={`${cpSelectClasses} ${this.props.selectClass}`} onClick={this.displayDialog}>
 					{selectedItem
