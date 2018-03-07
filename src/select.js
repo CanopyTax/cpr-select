@@ -41,7 +41,7 @@ export default class CanopySelect extends React.Component {
 	}
 
 	displayDialog = (e) => {
-		if (this.props.disabled) return;
+		if (this.disabled()) return;
 
 		this.setState({
 			dialogDisplayed: true
@@ -53,7 +53,7 @@ export default class CanopySelect extends React.Component {
 	};
 
 	onKeyDown = (e) => {
-		if (this.props.disabled) return;
+		if (this.disabled()) return;
 
 		const key = e.which;
 		let selectedIndex = this.state.selectedIndex;
@@ -109,7 +109,7 @@ export default class CanopySelect extends React.Component {
 	};
 
 	selectItem = (index, e) => {
-		if (this.props.disabled) return;
+		if (this.disabled()) return;
 
 		setTimeout(() => {
 			this.setState({
@@ -234,27 +234,32 @@ export default class CanopySelect extends React.Component {
 		}
 	};
 
+	disabled = () => {
+		return !this.props.options || this.props.options.length === 0 || this.props.disabled;
+	}
+
 	render = () => {
+		const {options = [], selected, outerClass, selectClass, placeholder } = this.props;
 		let cpSelectClasses = 'cp-select';
-		let selectedItem = this.props.options[
-			this.getIndex(this.props.selected)
+		let selectedItem = options[
+			this.getIndex(selected)
 		];
 		let that = this;
 
-		if (this.props.disabled || this.props.options.length === 0) cpSelectClasses += ' +disabled';
-		if (this.state.focused && !this.props.disabled) cpSelectClasses += ' +focus';
+		if (this.disabled()) cpSelectClasses += ' +disabled';
+		if (this.state.focused) cpSelectClasses += ' +focus';
 
 		return (
-			<div ref={function(el) { if (el) that.el = el; }} className={`cp-select-outer ${this.props.outerClass ? this.props.outerClass : ''}`} role='select'>
-				<input className=" cp-select__hidden-input" onFocus={this.focusSelect} onBlur={this.onBlur} onKeyDown={this.onKeyDown}/>
-				<div className={`${cpSelectClasses} ${this.props.selectClass}`} onClick={this.displayDialog}>
+			<div ref={function(el) { if (el) that.el = el; }} className={`cp-select-outer ${outerClass ? outerClass : ''}`} role='select'>
+				<input className="cp-select__hidden-input" onFocus={this.focusSelect} onBlur={this.onBlur} onKeyDown={this.onKeyDown}/>
+				<div className={`${cpSelectClasses} ${selectClass}`} onClick={this.displayDialog}>
 					{selectedItem
 						? <div className="cp-select__selected">{selectedItem.value}</div>
-						: <div className="cp-select__selected" style={{color:'#afafaf'}}>{this.props.placeholder}</div>
+						: <div className="cp-select__selected" style={{color:'#afafaf'}}>{placeholder}</div>
 					}
-					{this.props.options.length > 0 ? <div className="cp-select__icon"></div>: null}
+					{options.length > 0 && <div className="cp-select__icon"></div>}
 				</div>
-				{this.getDialog(this.state.dialogDisplayed, this.props.options)}
+				{this.getDialog(this.state.dialogDisplayed, options)}
 			</div>
 		);
 	}
