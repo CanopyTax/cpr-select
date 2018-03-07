@@ -241,18 +241,18 @@ export default class CanopySelect extends React.Component {
 		];
 		let that = this;
 
-		if (this.props.disabled) cpSelectClasses += ' +disabled';
+		if (this.props.disabled || this.props.options.length === 0) cpSelectClasses += ' +disabled';
 		if (this.state.focused && !this.props.disabled) cpSelectClasses += ' +focus';
 
 		return (
 			<div ref={function(el) { if (el) that.el = el; }} className={`cp-select-outer ${this.props.outerClass ? this.props.outerClass : ''}`} role='select'>
-				<input className="cp-select__hidden-input" onFocus={this.focusSelect} onBlur={this.onBlur} onKeyDown={this.onKeyDown}/>
+				<input className=" cp-select__hidden-input" onFocus={this.focusSelect} onBlur={this.onBlur} onKeyDown={this.onKeyDown}/>
 				<div className={`${cpSelectClasses} ${this.props.selectClass}`} onClick={this.displayDialog}>
 					{selectedItem
 						? <div className="cp-select__selected">{selectedItem.value}</div>
 						: <div className="cp-select__selected" style={{color:'#afafaf'}}>{this.props.placeholder}</div>
 					}
-					<div className="cp-select__icon"></div>
+					{this.props.options.length > 0 ? <div className="cp-select__icon"></div>: null}
 				</div>
 				{this.getDialog(this.state.dialogDisplayed, this.props.options)}
 			</div>
