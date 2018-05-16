@@ -223,10 +223,11 @@ export default class CanopySelect extends React.Component {
 				}
 			}, 100);
 
-			const maxHeight = this.props.maxHeight || 400;
+      const maxHeight = this.props.maxHeight || 400;
+      const zIndex = this.props.zIndex || 1000
 			return (
 				<div>
-					<ul className="cp-select__menu cps-dropdown-menu" style={{top: this.positionDialogAndGetTop(options, selectedIndex, maxHeight), maxHeight: maxHeight + 'px'}}>
+					<ul className="cp-select__menu cps-dropdown-menu" style={{top: this.positionDialogAndGetTop(options, selectedIndex, maxHeight), maxHeight: maxHeight + 'px', zIndex}}>
 						{optionElements}
 					</ul>
 				</div>
