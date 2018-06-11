@@ -38,11 +38,11 @@ module.exports = function(config) {
 		webpack: {
 			devtool: 'inline-sourcemap',
 			module: {
-				loaders: [
-					{test: /\.js$/, loader: 'babel-loader'},
+				rules: [
+					{test: /\.js$/, use: 'babel-loader'},
 					{
 						test: /\.css$/,
-						loader: "style-loader!css-loader!autoprefixer"
+						use: "style-loader!css-loader!autoprefixer"
 					}
 				]
 			}

@@ -27,11 +27,11 @@ export default class CanopySelect extends React.Component {
 
 	componentWillMount() {
 		document.body.addEventListener('click', this.state.close);
-	};
+	}
 
 	componentWillUnmount() {
 		document.body.removeEventListener('click', this.state.close);
-	};
+	}
 
 	componentDidMount() {
 		let index = this.getIndex(this.props.selected);
@@ -169,7 +169,16 @@ export default class CanopySelect extends React.Component {
 	onBlur = () => {
 		this.setState({
 			focused: false
-		});
+    }, () => {
+      if (this.props.onBlur) {
+			this.props.onBlur.call(
+				null,
+				this.props.options[this.state.selectedIndex].key,
+				this.props.options[this.state.selectedIndex],
+				this.state.selectedIndex
+			);
+      }
+    });
 	};
 
 	highlightByText = (charCode) => {
@@ -264,6 +273,6 @@ export default class CanopySelect extends React.Component {
 			</div>
 		);
 	}
-};
+}
 
 if (typeof window !== "undefined" && window && !window.CanopySelect) window.CanopySelect = CanopySelect;
