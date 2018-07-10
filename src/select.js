@@ -25,15 +25,12 @@ export default class CanopySelect extends React.Component {
 		}
 	};
 
-	componentWillMount() {
-		document.body.addEventListener('click', this.state.close);
-	}
-
 	componentWillUnmount() {
 		document.body.removeEventListener('click', this.state.close);
 	}
 
 	componentDidMount() {
+		document.body.addEventListener('click', this.state.close);
 		let index = this.getIndex(this.props.selected);
 		this.setState(() => ({
 			selectedIndex: index === -1 ? 0 : index,
