@@ -205,7 +205,7 @@ export default class CanopySelect extends React.Component {
     return option.value || option;
   };
 
-  getDialog = (dialogDisplayed, options, dropdownClass) => {
+  getDialog = (dialogDisplayed, options) => {
     if (dialogDisplayed) {
 
       let selectedIndex = this.state.selectedIndex;
@@ -231,6 +231,7 @@ export default class CanopySelect extends React.Component {
 
       const maxHeight = this.props.maxHeight || 400;
       const zIndex = this.props.zIndex || 1000
+      const dropdownClass = this.props.dropdownClass;
       return (
         <div>
           <ul className={`cp-select__menu cps-dropdown-menu ${dropdownClass ? dropdownClass : ''}`} style={{top: this.positionDialogAndGetTop(options, selectedIndex, maxHeight), maxHeight: maxHeight + 'px', zIndex}}>
@@ -246,7 +247,7 @@ export default class CanopySelect extends React.Component {
   }
 
   render = () => {
-    const {options = [], selected, outerClass, selectClass, placeholder, dropdownClass } = this.props;
+    const {options = [], selected, outerClass, selectClass, placeholder } = this.props;
     let cpSelectClasses = 'cp-select';
     let selectedItem = options[
       this.getIndex(selected)
@@ -266,7 +267,7 @@ export default class CanopySelect extends React.Component {
           }
           {options.length > 0 && <div className="cp-select__icon"></div>}
         </div>
-        {this.getDialog(this.state.dialogDisplayed, options, dropdownClass)}
+        {this.getDialog(this.state.dialogDisplayed, options)}
       </div>
     );
   }
