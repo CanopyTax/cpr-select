@@ -23,6 +23,7 @@ Canopy React Select
 + `placeholder`: placeholder for input
 + `selectClass`: (optional) custom class to be added to the select element
 + `outerClass`: (optional) custom class to be added to the outer containing element
++ `dropdownClass`: (optional) custom class to be added to the dropdown element
 + `zIndex`: (optional) override the default z-index of 1000
 
 ### Basic
@@ -31,22 +32,22 @@ import CanopySelect from 'cpr-select';
 import 'cpr-select/src/select.css';
 
 let items = [
-	{
-		"value": "Alabama",
-		"key": "AL"
-	}, {
-		"separator": true,
-	}, {
-		"value": "Alaska",
-		"key": "AK"
-	}, {
-		"value": "American Samoa",
-		"key": "AS"
-	}
+  {
+    "value": "Alabama",
+    "key": "AL"
+  }, {
+    "separator": true,
+  }, {
+    "value": "Alaska",
+    "key": "AK"
+  }, {
+    "value": "American Samoa",
+    "key": "AS"
+  }
 ];
 
 function itemsChanged(key, item, index) {
-	console.log(key);
+  console.log(key);
 }
 
 <CanopySelect options={items} onChange={itemsChanged} placeholder="Select a country" selected="AK"></CanopySelect>
