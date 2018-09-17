@@ -5,8 +5,8 @@ let searchString = "";
 let keyTimeout;
 
 function nearest(element, el) {
-	if (!element) return false;
-	return element === el || nearest(element.parentElement, el);
+  if (!element) return false;
+  return element === el || nearest(element.parentElement, el);
 }
 
 export default class CanopySelect extends React.Component {
@@ -167,110 +167,112 @@ export default class CanopySelect extends React.Component {
 		this.setState({
 			focused: false,
 			dialogDisplayed: false
+
     }, () => {
       if (this.props.onBlur) {
-			this.props.onBlur.call(
-				null,
-				this.props.options[this.state.selectedIndex].key,
-				this.props.options[this.state.selectedIndex],
-				this.state.selectedIndex
-			);
+      this.props.onBlur.call(
+        null,
+        this.props.options[this.state.selectedIndex].key,
+        this.props.options[this.state.selectedIndex],
+        this.state.selectedIndex
+      );
       }
     });
-	};
+  };
 
-	highlightByText = (charCode) => {
-		searchString += String.fromCharCode(charCode);
-		let i = this.getIndexFromString(searchString);
+  highlightByText = (charCode) => {
+    searchString += String.fromCharCode(charCode);
+    let i = this.getIndexFromString(searchString);
 
-		if(i > -1) {
-			this.selectItem(i);
-		}
+    if(i > -1) {
+      this.selectItem(i);
+    }
 
-		clearTimeout(keyTimeout);
+    clearTimeout(keyTimeout);
 
-		keyTimeout = setTimeout(function() {
-			searchString = "";
-		}, 1000);
-	};
+    keyTimeout = setTimeout(function() {
+      searchString = "";
+    }, 1000);
+  };
 
-	getIndexFromString = (searchString) => {
-		searchString = searchString.toLowerCase();
-		return findIndex(this.props.options, (option) => {
-			return this.getViewValue(option) !== null ? this.getViewValue(option).toLowerCase().indexOf(searchString) === 0 : false;
-		});
-	};
+  getIndexFromString = (searchString) => {
+    searchString = searchString.toLowerCase();
+    return findIndex(this.props.options, (option) => {
+      return this.getViewValue(option) !== null ? this.getViewValue(option).toLowerCase().indexOf(searchString) === 0 : false;
+    });
+  };
 
-	getViewValue = (option) => {
-		if (option.value === null || option.value === undefined) return null;
-		return option.value || option;
-	};
+  getViewValue = (option) => {
+    if (option.value === null || option.value === undefined) return null;
+    return option.value || option;
+  };
 
-	getDialog = (dialogDisplayed, options) => {
-		if (dialogDisplayed) {
+  getDialog = (dialogDisplayed, options) => {
+    if (dialogDisplayed) {
 
-			let selectedIndex = this.state.selectedIndex;
+      let selectedIndex = this.state.selectedIndex;
 
-			let optionElements = options.map((option, index) => {
-				if (option.separator) {
-					return <li key={`separator${index}`} className="separator" />
-				} else {
-					return <li key={option.key} className={selectedIndex === index ? '+selected' : ''} onMouseDown={this.selectItem.bind(this, index)}><a style={option.value !== null ? {} : {color: "rgba(0,0,0,0)"}}>{option.value !== null ? option.value : "null"}</a></li>
-				}
-			});
+      let optionElements = options.map((option, index) => {
+        if (option.separator) {
+          return <li key={`separator${index}`} className="separator" />
+        } else {
+          return <li key={option.key} className={selectedIndex === index ? '+selected' : ''} onMouseDown={this.selectItem.bind(this, index)}><a style={option.value !== null ? {} : {color: "rgba(0,0,0,0)"}}>{option.value !== null ? option.value : "null"}</a></li>
+        }
+      });
 
-			setTimeout(() => {
-				try {
-					this.el.querySelector('.cp-select__hidden-input').focus();
-				} catch(e) {
-					// It is okay if the element does not exist anymore
-					if (e.message.indexOf('Invariant Violation') === -1) {
-						throw new Error(e.message);
-					}
-				}
-			}, 100);
+      setTimeout(() => {
+        try {
+          this.el.querySelector('.cp-select__hidden-input').focus();
+        } catch(e) {
+          // It is okay if the element does not exist anymore
+          if (e.message.indexOf('Invariant Violation') === -1) {
+            throw new Error(e.message);
+          }
+        }
+      }, 100);
 
       const maxHeight = this.props.maxHeight || 400;
       const zIndex = this.props.zIndex || 1000
-			return (
-				<div>
-					<ul className="cp-select__menu cps-dropdown-menu" style={{top: this.positionDialogAndGetTop(options, selectedIndex, maxHeight), maxHeight: maxHeight + 'px', zIndex}}>
-						{optionElements}
-					</ul>
-				</div>
-			);
-		}
-	};
+      const dropdownClass = this.props.dropdownClass;
+      return (
+        <div>
+          <ul className={`cp-select__menu cps-dropdown-menu ${dropdownClass ? dropdownClass : ''}`} style={{top: this.positionDialogAndGetTop(options, selectedIndex, maxHeight), maxHeight: maxHeight + 'px', zIndex}}>
+            {optionElements}
+          </ul>
+        </div>
+      );
+    }
+  };
 
-	disabled = () => {
-		return !this.props.options || this.props.options.length === 0 || this.props.disabled;
-	}
+  disabled = () => {
+    return !this.props.options || this.props.options.length === 0 || this.props.disabled;
+  }
 
-	render = () => {
-		const {options = [], selected, outerClass, selectClass, placeholder } = this.props;
-		let cpSelectClasses = 'cp-select';
-		let selectedItem = options[
-			this.getIndex(selected)
-		];
-		let that = this;
+  render = () => {
+    const {options = [], selected, outerClass, selectClass, placeholder } = this.props;
+    let cpSelectClasses = 'cp-select';
+    let selectedItem = options[
+      this.getIndex(selected)
+    ];
+    let that = this;
 
-		if (this.disabled()) cpSelectClasses += ' +disabled';
-		if (this.state.focused) cpSelectClasses += ' +focus';
+    if (this.disabled()) cpSelectClasses += ' +disabled';
+    if (this.state.focused) cpSelectClasses += ' +focus';
 
-		return (
-			<div ref={function(el) { if (el) that.el = el; }} className={`cp-select-outer ${outerClass ? outerClass : ''}`} role='select'>
-				<input className="cp-select__hidden-input" onFocus={this.focusSelect} onBlur={this.onBlur} onKeyDown={this.onKeyDown}/>
-				<div className={`${cpSelectClasses} ${selectClass ? selectClass : ''}`} onClick={this.displayDialog}>
-					{selectedItem
-						? <div className="cp-select__selected">{selectedItem.value}</div>
-						: <div className="cp-select__selected" style={{color:'#afafaf'}}>{placeholder}</div>
-					}
-					{options.length > 0 && <div className="cp-select__icon"></div>}
-				</div>
-				{this.getDialog(this.state.dialogDisplayed, options)}
-			</div>
-		);
-	}
+    return (
+      <div ref={function(el) { if (el) that.el = el; }} className={`cp-select-outer ${outerClass ? outerClass : ''}`} role='select'>
+        <input className="cp-select__hidden-input" onFocus={this.focusSelect} onBlur={this.onBlur} onKeyDown={this.onKeyDown}/>
+        <div className={`${cpSelectClasses} ${selectClass ? selectClass : ''}`} onClick={this.displayDialog}>
+          {selectedItem
+            ? <div className="cp-select__selected">{selectedItem.value}</div>
+            : <div className="cp-select__selected" style={{color:'#afafaf'}}>{placeholder}</div>
+          }
+          {options.length > 0 && <div className="cp-select__icon"></div>}
+        </div>
+        {this.getDialog(this.state.dialogDisplayed, options)}
+      </div>
+    );
+  }
 }
 
 if (typeof window !== "undefined" && window && !window.CanopySelect) window.CanopySelect = CanopySelect;
