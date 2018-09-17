@@ -165,7 +165,8 @@ export default class CanopySelect extends React.Component {
 
 	onBlur = () => {
 		this.setState({
-			focused: false
+			focused: false,
+			dialogDisplayed: false
     }, () => {
       if (this.props.onBlur) {
 			this.props.onBlur.call(
