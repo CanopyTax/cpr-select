@@ -55,11 +55,11 @@ export default class CanopySelect extends React.Component {
     const key = e.which;
     let selectedIndex = this.state.selectedIndex;
 
-    if(key !== 9) {			// tab key
+    if(key !== 9) {      // tab key
       e.preventDefault();
     }
 
-    if(key === 13) {				// enter key
+    if(key === 13) {        // enter key
       this.selectItem(selectedIndex)
     } else if(key === 38) { // up key
       if (selectedIndex <= 0) {
@@ -89,7 +89,7 @@ export default class CanopySelect extends React.Component {
       this.setState({
         dialogDisplayed: false
       });
-    } else {								// all other keys
+    } else {                // all other keys
       this.highlightByText(e.which);
     }
   };
@@ -165,7 +165,9 @@ export default class CanopySelect extends React.Component {
 
   onBlur = () => {
     this.setState({
-      focused: false
+      focused: false,
+      dialogDisplayed: false
+
     }, () => {
       if (this.props.onBlur) {
       this.props.onBlur.call(
