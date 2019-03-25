@@ -23,6 +23,7 @@ Canopy React Select
 + `placeholder`: placeholder for input
 + `selectClass`: (optional) custom class to be added to the select element
 + `outerClass`: (optional) custom class to be added to the outer containing element
++ `inputClass`: (optional) custom class to be added to the hidden input element
 + `dropdownClass`: (optional) custom class to be added to the dropdown element
 + `zIndex`: (optional) override the default z-index of 1000
 

@@ -249,7 +249,7 @@ export default class CanopySelect extends React.Component {
   }
 
   render = () => {
-    const {options = [], selected, outerClass, selectClass, placeholder } = this.props;
+    const {options = [], selected, outerClass, selectClass, placeholder, inputClass } = this.props;
     let cpSelectClasses = 'cp-select';
     let selectedItem = options[
       this.getIndex(selected)
@@ -261,7 +261,7 @@ export default class CanopySelect extends React.Component {
 
     return (
       <div ref={function(el) { if (el) that.el = el; }} className={`cp-select-outer ${outerClass ? outerClass : ''}`} role='select'>
-        <input className="cp-select__hidden-input" onFocus={this.focusSelect} onBlur={this.onBlur} onKeyDown={this.onKeyDown}/>
+        <input className={`cp-select__hidden-input ${inputClass ? inputClass : ''}`} onFocus={this.focusSelect} onBlur={this.onBlur} onKeyDown={this.onKeyDown}/>
         <div className={`${cpSelectClasses} ${selectClass ? selectClass : ''}`} onClick={this.displayDialog}>
           {selectedItem
             ? <div className="cp-select__selected">{selectedItem.value}</div>
