@@ -142,4 +142,40 @@ describe('select', function() {
     TestUtils.Simulate.keyDown(input, {which: 38});
     TestUtils.Simulate.keyDown(input, {which: 13});
   });
+
+  it('Should not select disabled items with arrows', function(run) {
+    let items = [
+      {
+        "value": "Alabama",
+        "key": "AL"
+      }, {
+        "value": "Alaska",
+        "key": "AK",
+        "disabled": true
+      }, {
+        "value": "American Samoa",
+        "key": "AS",
+        "disabled": true
+      }
+    ];
+
+    function callback(key, item, index) {
+      expect(key).toBe('AL');
+      expect(item.key).toBe('AL');
+      expect(index).toBe(0);
+      run();
+    }
+
+    let multiSelect = TestUtils.renderIntoDocument(
+      <CanopySelect options={items} onChange={callback}></CanopySelect>
+    );
+
+    let select = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cp-select');
+    TestUtils.Simulate.click(select);
+    let input = TestUtils.findRenderedDOMComponentWithClass(multiSelect, 'cp-select__hidden-input');
+    TestUtils.Simulate.keyDown(input, {which: 38});
+    TestUtils.Simulate.keyDown(input, {which: 40});
+    TestUtils.Simulate.keyDown(input, {which: 40});
+    TestUtils.Simulate.keyDown(input, {which: 13});
+  });
 });
