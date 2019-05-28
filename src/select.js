@@ -1,5 +1,5 @@
 import React from 'react';
-import {findIndex} from 'lodash';
+import {findIndex, noop} from 'lodash';
 
 let searchString = "";
 let keyTimeout;
@@ -62,7 +62,7 @@ export default class CanopySelect extends React.Component {
     if(key === 13) {        // enter key
       this.selectItem(selectedIndex)
     } else if(key === 38) { // up key
-      if (selectedIndex <= 0) {
+      if (selectedIndex <= 0 || this.props.options[selectedIndex - 1].disabled) {
         this.setState({
           dialogDisplayed: true,
         });
@@ -75,7 +75,7 @@ export default class CanopySelect extends React.Component {
 
     } else if (key === 40) { // down key
 
-      if (selectedIndex === this.props.options.length - 1) {
+      if (selectedIndex === this.props.options.length - 1 || this.props.options[selectedIndex + 1].disabled) {
         this.setState({
           dialogDisplayed: true
         });
@@ -216,7 +216,22 @@ export default class CanopySelect extends React.Component {
         if (option.separator) {
           return <li key={`separator${index}`} className="separator" />
         } else {
-          return <li key={option.key} className={selectedIndex === index ? '+selected' : ''} onMouseDown={this.selectItem.bind(this, index)}><a style={option.value !== null ? {} : {color: "rgba(0,0,0,0)"}}>{option.value !== null ? option.value : "null"}</a></li>
+          const linkStyles = {
+            color: option.value !== null ? "" : "rgba(0,0,0,0)",
+            backgroundColor: option.disabled ? "#fff" : "",
+            cursor: option.disabled ? "default" : ""
+          }
+          return (
+            <li
+              key={option.key}
+              className={selectedIndex === index ? '+selected' : ''}
+              onMouseDown={option.disabled ? noop : this.selectItem.bind(this, index)}
+            >
+              <a style={linkStyles} className={`${option.disabled ? "cps-color-af" : ""}`}>
+                {option.value !== null ? option.value : "null"}
+              </a>
+            </li>
+          )
         }
       });
 
