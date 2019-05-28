@@ -16,7 +16,7 @@ Canopy React Select
 
 ### Props
 + `selected`: the key of the currently selected item
-+ `options`: the items to select from. You can insert a separator between items by putting `{separator: true}` as an item.
++ `options`: the items to select from. You can insert a separator between items by putting `{separator: true}` as an item. You can also prevent the user from selecting an item by including `disabled: true` in your item object.
 + `onChange`: called when selected item changes
 + `onBlur`: called when the select widget is blurred (with the currently selected item)
 + `disabled`: pass true to disable the input
@@ -43,7 +43,8 @@ let items = [
     "key": "AK"
   }, {
     "value": "American Samoa",
-    "key": "AS"
+    "key": "AS",
+    "disabled": true
   }
 ];
 
