@@ -1,5 +1,5 @@
 import React from 'react';
-import {findIndex, noop} from 'lodash';
+import {findIndex, noop, isNumber} from 'lodash';
 
 let searchString = "";
 let keyTimeout;
@@ -52,16 +52,16 @@ export default class CanopySelect extends React.Component {
   onKeyDown = (e) => {
     if (this.disabled()) return;
 
-    const key = e.which;
+    const key = e.key || e.which;
     let selectedIndex = this.state.selectedIndex;
 
-    if(key !== 9) {      // tab key
+    if(key !== "Tab" && key !== 9) {      // tab key
       e.preventDefault();
     }
 
-    if(key === 13) {        // enter key
+    if(key === "Enter" || key === 13) {        // enter key
       this.selectItem(selectedIndex)
-    } else if(key === 38) { // up key
+    } else if(key === "ArrowUp" || key === 38) { // up key
       if (selectedIndex <= 0 || this.props.options[selectedIndex - 1].disabled) {
         this.setState({
           dialogDisplayed: true,
@@ -73,7 +73,7 @@ export default class CanopySelect extends React.Component {
         });
       }
 
-    } else if (key === 40) { // down key
+    } else if (key === "ArrowDown" || key === 40) { // down key
 
       if (selectedIndex === this.props.options.length - 1 || this.props.options[selectedIndex + 1].disabled) {
         this.setState({
@@ -85,12 +85,12 @@ export default class CanopySelect extends React.Component {
           selectedIndex: selectedIndex + 1
         });
       }
-    } else if(key === 27) { // escape key
+    } else if(key === "Esc" || key === "Escape" || key === 27) { // escape key
       this.setState({
         dialogDisplayed: false
       });
     } else {                // all other keys
-      this.highlightByText(e.which);
+      this.highlightByText(key);
     }
   };
 
@@ -180,8 +180,8 @@ export default class CanopySelect extends React.Component {
     });
   };
 
-  highlightByText = (charCode) => {
-    searchString += String.fromCharCode(charCode);
+  highlightByText = (key) => {
+    searchString += isNumber(key) ? String.fromCharCode(key) : key;
     let i = this.getIndexFromString(searchString);
 
     if(i > -1) {
