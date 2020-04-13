@@ -28,7 +28,8 @@
 }
 
 .cp-select.\+focus {
-	box-shadow: 0 0 0 2px rgba(0,191,75,.3); /* emulate the border */
+	border: 1px solid var(--cps-color-primary); /* emulate the border */
+  box-shadow: none;
 }
 
 .cp-select__selected {
@@ -85,4 +86,8 @@
 	height: 0px !important;
 	margin-top: 15px;
 	margin-bottom: 16px;
+}
+
+.bottom {
+  bottom: 100%;
 }
