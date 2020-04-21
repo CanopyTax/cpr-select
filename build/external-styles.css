@@ -13,7 +13,6 @@
   padding: 2px 12px 1px 12px;
   font-size: 14px;
   line-height: 1.42857143;
-  color: #555;
   background-color: #fff;
   background-image: none;
   border: 1px solid #dfdfdf;
@@ -34,14 +33,6 @@
 
 .cps-bg-medium-gray {
   background-color: #5c5c5c !important;
-}
-
-.cps-gray-5 {
-  color: #f2f2f2 !important;
-}
-
-.cps-white {
-  color: white !important;
 }
 
 .cps-bg-gray-10 {
@@ -76,7 +67,6 @@
   clear: both;
   font-weight: normal;
   line-height: 1.42857143;
-  color: #333333;
   white-space: nowrap;
   text-decoration: none;
 	cursor: pointer;
