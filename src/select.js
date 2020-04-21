@@ -280,7 +280,7 @@ export default class CanopySelect extends React.Component {
         <div className={`${cpSelectClasses} ${selectClass ? selectClass : ''}`} onClick={this.displayDialog}>
           {selectedItem
             ? <div className="cp-select__selected">{selectedItem.value}</div>
-            : <div className="cp-select__selected" style={{color:'#afafaf'}}>{placeholder}</div>
+            : <div className="cp-select__selected">{placeholder}</div>
           }
           {options.length > 0 && <div className="cp-select__icon"></div>}
         </div>
